@@ -1,13 +1,14 @@
 import { ref } from 'vue'
-import type { FloorPlan, Wall, WallDimensions } from '@/types'
+import type { FloorPlan, Wall, Opening, WallDimensions } from '@/types'
 
 const DEFAULT_DIMENSIONS: WallDimensions = {
   wallHeight: 250, // cm
-  thickness: 15, // cm
+  thickness: 15,   // cm
 }
 
 const DEFAULT_FLOOR_PLAN: FloorPlan = {
   walls: [],
+  openings: [],
   dimensions: DEFAULT_DIMENSIONS,
 }
 
@@ -18,18 +19,12 @@ export function useFloorPlan() {
     floorPlan.value.walls.push(wall)
   }
 
+  function addOpening(opening: Opening): void {
+    floorPlan.value.openings.push(opening)
+  }
+
   function setDimensions(dimensions: Partial<WallDimensions>): void {
     floorPlan.value.dimensions = { ...floorPlan.value.dimensions, ...dimensions }
-  }
-
-  function updateWallLength(index: number, length: number): void {
-    const wall = floorPlan.value.walls[index]
-    if (!wall) return
-    floorPlan.value.walls[index] = { ...wall, length }
-  }
-
-  function deleteWall(index: number): void {
-    floorPlan.value.walls.splice(index, 1)
   }
 
   function resetPlan(): void {
@@ -43,9 +38,8 @@ export function useFloorPlan() {
   return {
     floorPlan,
     addWall,
+    addOpening,
     setDimensions,
-    updateWallLength,
-    deleteWall,
     resetPlan,
     undoLastWall,
   }

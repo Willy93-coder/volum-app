@@ -9,12 +9,21 @@ export interface Wall {
   length?: number
 }
 
+export type OpeningKind = 'door' | 'window'
+
+export interface Opening {
+  kind: OpeningKind
+  start: Point  // canvas coordinates
+  end: Point    // canvas coordinates
+}
+
 export interface WallDimensions {
-  wallHeight: number // cm - axis Y
-  thickness: number // cm - axis X
+  wallHeight: number // cm
+  thickness: number  // cm
 }
 
 export interface FloorPlan {
   walls: Wall[]
+  openings: Opening[]
   dimensions: WallDimensions
 }
