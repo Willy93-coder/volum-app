@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "wasm:build": "wasm-pack build wasm --target bundler --out-dir ../src/wasm-pkg",
     "build": "run-p type-check \"build-only {@}\" --",
     "pages:deploy": "gh-pages -d dist",
     "preview": "vite preview",
@@ -52,6 +53,7 @@
     "typescript": "~6.0.3",
     "vite": "^8.0.8",
     "vite-plugin-vue-devtools": "^8.1.1",
+    "vite-plugin-wasm": "^3.6.0",
     "vitest": "^4.1.4",
     "vue-tsc": "^3.2.6"
   },
